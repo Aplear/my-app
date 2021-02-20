@@ -1,26 +1,23 @@
 import{Component} from 'react';
-import {getWeek,parse,getWeeksInMonth} from 'date-fns';
+import {getWeek,parse,getWeeksInMonth, setISODay, addWeeks} from 'date-fns';
 import Week from '../week'
 
 
 class Month extends Component {
-  constructor(props) {
-    super(props)
-  }
+  
   
   render(){
     const { year, month,day } = this.props;
-
-  const startOfMonth = parse(`${year} ${month}`, 'y M', new Date());
-  const weekAmount = getWeeksInMonth(startOfMonth);
-  const weeksArray =[];
-    Array.apply(null, {length: weekAmount}).map(w => {
-        //const startOfWeek = 
-        weeksArray.push(<Week year = {year} month={month} day={day} week={w}/>)
-       
-    })
     
-    return <>gsgsg{[weeksArray]}</>
+    const startOfMonth = parse(`${year} ${month}`, 'y M', new Date());
+    const weekAmount = getWeeksInMonth(startOfMonth, 1)
+    const weeksArray =[];
+    
+    for (var w = 0; w<weekAmount; w++) {
+      weeksArray.push(<Week year ={year} month={month} day={day} week={getWeek(addWeeks(startOfMonth, w))}/>);
+    }
+    
+    return <>{[weeksArray]}</>
       
     
   }

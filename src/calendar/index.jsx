@@ -25,6 +25,7 @@ class Calendar extends React.Component {
     const {day}=this.state;
     const year = getYear(day);
     const month = getMonth(day)
+    
     return (
       <section className ={style.calendarContainer}>
         <CurrentDay day={day}/>
